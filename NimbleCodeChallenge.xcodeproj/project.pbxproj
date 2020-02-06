@@ -3,18 +3,29 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05693EE1862798FA410A61F8 /* Pods_NimbleCodeChallengeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A7D7A6127F198320257EE4B /* Pods_NimbleCodeChallengeTests.framework */; };
+		1E05D9E288998500D72D6989 /* Pods_NimbleCodeChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90F4022EDA010721167B78A1 /* Pods_NimbleCodeChallenge.framework */; };
+		4D2DF67A7B444784CFCDFF2B /* Pods_NimbleCodeChallenge_NimbleCodeChallengeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93BED338FC8947D5A4A1107B /* Pods_NimbleCodeChallenge_NimbleCodeChallengeUITests.framework */; };
+		FA2BD57723EA362A0089ACE9 /* CachedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2BD57623EA362A0089ACE9 /* CachedImageView.swift */; };
+		FAA5ECF123EB4B4A00BD87D9 /* NetworkStatusVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5ECF023EB4B4A00BD87D9 /* NetworkStatusVC.swift */; };
+		FAA5ECFA23EBC5D900BD87D9 /* NimbleCodeChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB7E68423E5DF400007D438 /* NimbleCodeChallengeTests.swift */; };
 		FAB7E66E23E5DF390007D438 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB7E66D23E5DF390007D438 /* AppDelegate.swift */; };
 		FAB7E67023E5DF390007D438 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB7E66F23E5DF390007D438 /* SceneDelegate.swift */; };
-		FAB7E67223E5DF390007D438 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB7E67123E5DF390007D438 /* ViewController.swift */; };
+		FAB7E67223E5DF390007D438 /* SurveyDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB7E67123E5DF390007D438 /* SurveyDetailVC.swift */; };
 		FAB7E67523E5DF390007D438 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAB7E67323E5DF390007D438 /* Main.storyboard */; };
 		FAB7E67723E5DF400007D438 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAB7E67623E5DF400007D438 /* Assets.xcassets */; };
 		FAB7E67A23E5DF400007D438 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAB7E67823E5DF400007D438 /* LaunchScreen.storyboard */; };
-		FAB7E68523E5DF400007D438 /* NimbleCodeChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB7E68423E5DF400007D438 /* NimbleCodeChallengeTests.swift */; };
 		FAB7E69023E5DF400007D438 /* NimbleCodeChallengeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB7E68F23E5DF400007D438 /* NimbleCodeChallengeUITests.swift */; };
+		FAB7E69E23E5E2360007D438 /* MainPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB7E69D23E5E2360007D438 /* MainPageVC.swift */; };
+		FAB7E6A523E5E6720007D438 /* MainPageVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB7E6A423E5E6720007D438 /* MainPageVM.swift */; };
+		FAD0D97423E5F72500FFBE58 /* OathModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD0D97323E5F72500FFBE58 /* OathModel.swift */; };
+		FAFB964D23E8AE9C00AD7FBC /* SurveyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFB964C23E8AE9C00AD7FBC /* SurveyModel.swift */; };
+		FAFB965023E8B8F800AD7FBC /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFB964F23E8B8F800AD7FBC /* APIClient.swift */; };
+		FAFB965223E8EBE700AD7FBC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFB965123E8EBE700AD7FBC /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,10 +46,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		02FD498D934232B65781AC4A /* Pods-NimbleCodeChallengeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NimbleCodeChallengeTests.release.xcconfig"; path = "Target Support Files/Pods-NimbleCodeChallengeTests/Pods-NimbleCodeChallengeTests.release.xcconfig"; sourceTree = "<group>"; };
+		3BAA7B667C66BB7D6F65B0B9 /* Pods-NimbleCodeChallenge-NimbleCodeChallengeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NimbleCodeChallenge-NimbleCodeChallengeUITests.release.xcconfig"; path = "Target Support Files/Pods-NimbleCodeChallenge-NimbleCodeChallengeUITests/Pods-NimbleCodeChallenge-NimbleCodeChallengeUITests.release.xcconfig"; sourceTree = "<group>"; };
+		4A3B8D31DDBFC5FEDF1FFC16 /* Pods-NimbleCodeChallengeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NimbleCodeChallengeTests.debug.xcconfig"; path = "Target Support Files/Pods-NimbleCodeChallengeTests/Pods-NimbleCodeChallengeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4A7D7A6127F198320257EE4B /* Pods_NimbleCodeChallengeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NimbleCodeChallengeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		763E2D64C597275B3E7ED6BE /* Pods-NimbleCodeChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NimbleCodeChallenge.debug.xcconfig"; path = "Target Support Files/Pods-NimbleCodeChallenge/Pods-NimbleCodeChallenge.debug.xcconfig"; sourceTree = "<group>"; };
+		90F4022EDA010721167B78A1 /* Pods_NimbleCodeChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NimbleCodeChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		93BED338FC8947D5A4A1107B /* Pods_NimbleCodeChallenge_NimbleCodeChallengeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NimbleCodeChallenge_NimbleCodeChallengeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9AB48888EEF30B54E9727027 /* Pods-NimbleCodeChallenge-NimbleCodeChallengeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NimbleCodeChallenge-NimbleCodeChallengeUITests.debug.xcconfig"; path = "Target Support Files/Pods-NimbleCodeChallenge-NimbleCodeChallengeUITests/Pods-NimbleCodeChallenge-NimbleCodeChallengeUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		DDC77E78B7EDC8ADB41598ED /* Pods-NimbleCodeChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NimbleCodeChallenge.release.xcconfig"; path = "Target Support Files/Pods-NimbleCodeChallenge/Pods-NimbleCodeChallenge.release.xcconfig"; sourceTree = "<group>"; };
+		FA2BD57623EA362A0089ACE9 /* CachedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImageView.swift; sourceTree = "<group>"; };
+		FAA5ECF023EB4B4A00BD87D9 /* NetworkStatusVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatusVC.swift; sourceTree = "<group>"; };
 		FAB7E66A23E5DF390007D438 /* NimbleCodeChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NimbleCodeChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAB7E66D23E5DF390007D438 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAB7E66F23E5DF390007D438 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		FAB7E67123E5DF390007D438 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FAB7E67123E5DF390007D438 /* SurveyDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyDetailVC.swift; sourceTree = "<group>"; };
 		FAB7E67423E5DF390007D438 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FAB7E67623E5DF400007D438 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FAB7E67923E5DF400007D438 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +71,12 @@
 		FAB7E68B23E5DF400007D438 /* NimbleCodeChallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NimbleCodeChallengeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAB7E68F23E5DF400007D438 /* NimbleCodeChallengeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NimbleCodeChallengeUITests.swift; sourceTree = "<group>"; };
 		FAB7E69123E5DF400007D438 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FAB7E69D23E5E2360007D438 /* MainPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageVC.swift; sourceTree = "<group>"; };
+		FAB7E6A423E5E6720007D438 /* MainPageVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageVM.swift; sourceTree = "<group>"; };
+		FAD0D97323E5F72500FFBE58 /* OathModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OathModel.swift; sourceTree = "<group>"; };
+		FAFB964C23E8AE9C00AD7FBC /* SurveyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyModel.swift; sourceTree = "<group>"; };
+		FAFB964F23E8B8F800AD7FBC /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		FAFB965123E8EBE700AD7FBC /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E05D9E288998500D72D6989 /* Pods_NimbleCodeChallenge.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05693EE1862798FA410A61F8 /* Pods_NimbleCodeChallengeTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,12 +100,44 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D2DF67A7B444784CFCDFF2B /* Pods_NimbleCodeChallenge_NimbleCodeChallengeUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		40003217577CFBAA4B568CB2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				763E2D64C597275B3E7ED6BE /* Pods-NimbleCodeChallenge.debug.xcconfig */,
+				DDC77E78B7EDC8ADB41598ED /* Pods-NimbleCodeChallenge.release.xcconfig */,
+				9AB48888EEF30B54E9727027 /* Pods-NimbleCodeChallenge-NimbleCodeChallengeUITests.debug.xcconfig */,
+				3BAA7B667C66BB7D6F65B0B9 /* Pods-NimbleCodeChallenge-NimbleCodeChallengeUITests.release.xcconfig */,
+				4A3B8D31DDBFC5FEDF1FFC16 /* Pods-NimbleCodeChallengeTests.debug.xcconfig */,
+				02FD498D934232B65781AC4A /* Pods-NimbleCodeChallengeTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		A192BECEF038D32F00E7E4A5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				90F4022EDA010721167B78A1 /* Pods_NimbleCodeChallenge.framework */,
+				93BED338FC8947D5A4A1107B /* Pods_NimbleCodeChallenge_NimbleCodeChallengeUITests.framework */,
+				4A7D7A6127F198320257EE4B /* Pods_NimbleCodeChallengeTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FA2BD57523EA360F0089ACE9 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				FA2BD57623EA362A0089ACE9 /* CachedImageView.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
 		FAB7E66123E5DF390007D438 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +145,8 @@
 				FAB7E68323E5DF400007D438 /* NimbleCodeChallengeTests */,
 				FAB7E68E23E5DF400007D438 /* NimbleCodeChallengeUITests */,
 				FAB7E66B23E5DF390007D438 /* Products */,
+				40003217577CFBAA4B568CB2 /* Pods */,
+				A192BECEF038D32F00E7E4A5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,10 +163,15 @@
 		FAB7E66C23E5DF390007D438 /* NimbleCodeChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				FA2BD57523EA360F0089ACE9 /* CustomViews */,
+				FAFB964E23E8B8E000AD7FBC /* NetworkManager */,
+				FAB7E6A323E5E5C20007D438 /* Storyboards */,
+				FAB7E6A223E5E5900007D438 /* Extension&Utils */,
+				FAB7E6A123E5E5890007D438 /* Models */,
+				FAB7E6A023E5E5820007D438 /* ViewModels */,
+				FAB7E69F23E5E54F0007D438 /* ViewControllers */,
 				FAB7E66D23E5DF390007D438 /* AppDelegate.swift */,
 				FAB7E66F23E5DF390007D438 /* SceneDelegate.swift */,
-				FAB7E67123E5DF390007D438 /* ViewController.swift */,
-				FAB7E67323E5DF390007D438 /* Main.storyboard */,
 				FAB7E67623E5DF400007D438 /* Assets.xcassets */,
 				FAB7E67823E5DF400007D438 /* LaunchScreen.storyboard */,
 				FAB7E67B23E5DF400007D438 /* Info.plist */,
@@ -128,6 +197,57 @@
 			path = NimbleCodeChallengeUITests;
 			sourceTree = "<group>";
 		};
+		FAB7E69F23E5E54F0007D438 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FAB7E67123E5DF390007D438 /* SurveyDetailVC.swift */,
+				FAB7E69D23E5E2360007D438 /* MainPageVC.swift */,
+				FAA5ECF023EB4B4A00BD87D9 /* NetworkStatusVC.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		FAB7E6A023E5E5820007D438 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				FAB7E6A423E5E6720007D438 /* MainPageVM.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		FAB7E6A123E5E5890007D438 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FAD0D97323E5F72500FFBE58 /* OathModel.swift */,
+				FAFB964C23E8AE9C00AD7FBC /* SurveyModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FAB7E6A223E5E5900007D438 /* Extension&Utils */ = {
+			isa = PBXGroup;
+			children = (
+				FAFB965123E8EBE700AD7FBC /* Extensions.swift */,
+			);
+			path = "Extension&Utils";
+			sourceTree = "<group>";
+		};
+		FAB7E6A323E5E5C20007D438 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				FAB7E67323E5DF390007D438 /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		FAFB964E23E8B8E000AD7FBC /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				FAFB964F23E8B8F800AD7FBC /* APIClient.swift */,
+			);
+			path = NetworkManager;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,9 +255,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FAB7E69423E5DF400007D438 /* Build configuration list for PBXNativeTarget "NimbleCodeChallenge" */;
 			buildPhases = (
+				A20544F2B708ECE391EFA74D /* [CP] Check Pods Manifest.lock */,
 				FAB7E66623E5DF390007D438 /* Sources */,
 				FAB7E66723E5DF390007D438 /* Frameworks */,
 				FAB7E66823E5DF390007D438 /* Resources */,
+				8F3BB2F6D36F152C03C9C070 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -152,9 +274,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FAB7E69723E5DF400007D438 /* Build configuration list for PBXNativeTarget "NimbleCodeChallengeTests" */;
 			buildPhases = (
+				BCFE5939A96D01BAC16B57BE /* [CP] Check Pods Manifest.lock */,
 				FAB7E67C23E5DF400007D438 /* Sources */,
 				FAB7E67D23E5DF400007D438 /* Frameworks */,
 				FAB7E67E23E5DF400007D438 /* Resources */,
+				80AF6D93B925A4DC5420EF80 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -170,9 +294,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FAB7E69A23E5DF400007D438 /* Build configuration list for PBXNativeTarget "NimbleCodeChallengeUITests" */;
 			buildPhases = (
+				89FAD6DB9FE36B42F4894BD8 /* [CP] Check Pods Manifest.lock */,
 				FAB7E68723E5DF400007D438 /* Sources */,
 				FAB7E68823E5DF400007D438 /* Frameworks */,
 				FAB7E68923E5DF400007D438 /* Resources */,
+				E555F5B961898EF9665DC895 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -203,7 +329,6 @@
 					};
 					FAB7E68A23E5DF400007D438 = {
 						CreatedOnToolsVersion = 11.3.1;
-						TestTargetID = FAB7E66923E5DF390007D438;
 					};
 				};
 			};
@@ -254,14 +379,142 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		80AF6D93B925A4DC5420EF80 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NimbleCodeChallengeTests/Pods-NimbleCodeChallengeTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NimbleCodeChallengeTests/Pods-NimbleCodeChallengeTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NimbleCodeChallengeTests/Pods-NimbleCodeChallengeTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		89FAD6DB9FE36B42F4894BD8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NimbleCodeChallenge-NimbleCodeChallengeUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8F3BB2F6D36F152C03C9C070 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NimbleCodeChallenge/Pods-NimbleCodeChallenge-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NimbleCodeChallenge/Pods-NimbleCodeChallenge-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NimbleCodeChallenge/Pods-NimbleCodeChallenge-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A20544F2B708ECE391EFA74D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NimbleCodeChallenge-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BCFE5939A96D01BAC16B57BE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NimbleCodeChallengeTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E555F5B961898EF9665DC895 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NimbleCodeChallenge-NimbleCodeChallengeUITests/Pods-NimbleCodeChallenge-NimbleCodeChallengeUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NimbleCodeChallenge-NimbleCodeChallengeUITests/Pods-NimbleCodeChallenge-NimbleCodeChallengeUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NimbleCodeChallenge-NimbleCodeChallengeUITests/Pods-NimbleCodeChallenge-NimbleCodeChallengeUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		FAB7E66623E5DF390007D438 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAB7E67223E5DF390007D438 /* ViewController.swift in Sources */,
+				FAB7E67223E5DF390007D438 /* SurveyDetailVC.swift in Sources */,
+				FAFB965223E8EBE700AD7FBC /* Extensions.swift in Sources */,
+				FA2BD57723EA362A0089ACE9 /* CachedImageView.swift in Sources */,
+				FAD0D97423E5F72500FFBE58 /* OathModel.swift in Sources */,
+				FAB7E6A523E5E6720007D438 /* MainPageVM.swift in Sources */,
 				FAB7E66E23E5DF390007D438 /* AppDelegate.swift in Sources */,
+				FAFB965023E8B8F800AD7FBC /* APIClient.swift in Sources */,
+				FAFB964D23E8AE9C00AD7FBC /* SurveyModel.swift in Sources */,
+				FAB7E69E23E5E2360007D438 /* MainPageVC.swift in Sources */,
 				FAB7E67023E5DF390007D438 /* SceneDelegate.swift in Sources */,
+				FAA5ECF123EB4B4A00BD87D9 /* NetworkStatusVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,7 +522,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAB7E68523E5DF400007D438 /* NimbleCodeChallengeTests.swift in Sources */,
+				FAA5ECFA23EBC5D900BD87D9 /* NimbleCodeChallengeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,6 +685,7 @@
 		};
 		FAB7E69523E5DF400007D438 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 763E2D64C597275B3E7ED6BE /* Pods-NimbleCodeChallenge.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -450,6 +704,7 @@
 		};
 		FAB7E69623E5DF400007D438 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DDC77E78B7EDC8ADB41598ED /* Pods-NimbleCodeChallenge.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -468,6 +723,7 @@
 		};
 		FAB7E69823E5DF400007D438 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4A3B8D31DDBFC5FEDF1FFC16 /* Pods-NimbleCodeChallengeTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -490,6 +746,7 @@
 		};
 		FAB7E69923E5DF400007D438 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 02FD498D934232B65781AC4A /* Pods-NimbleCodeChallengeTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -512,6 +769,7 @@
 		};
 		FAB7E69B23E5DF400007D438 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9AB48888EEF30B54E9727027 /* Pods-NimbleCodeChallenge-NimbleCodeChallengeUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -524,14 +782,15 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nawaz.NimbleCodeChallengeUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = NimbleCodeChallenge;
 			};
 			name = Debug;
 		};
 		FAB7E69C23E5DF400007D438 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3BAA7B667C66BB7D6F65B0B9 /* Pods-NimbleCodeChallenge-NimbleCodeChallengeUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -544,9 +803,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nawaz.NimbleCodeChallengeUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = NimbleCodeChallenge;
 			};
 			name = Release;
 		};

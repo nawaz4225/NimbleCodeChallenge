@@ -10,13 +10,19 @@ import UIKit
 
 class NetworkStatusVC: UIViewController {
 
+    @IBOutlet weak var retryBtn: UIButton!
+    @IBOutlet weak var statusLbl: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func retryButtonPressed(_ sender: UIButton) {
+        
+        
+    }
+    
     /*
     // MARK: - Navigation
 
