@@ -8,7 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class SurveyDetailVC: UIViewController {
+    
+    var index = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
