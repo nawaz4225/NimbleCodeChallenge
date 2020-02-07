@@ -1,7 +1,7 @@
 # NimbleCodeChallenge
 
 ## Steps to follow to make project run successfull. <br/>
-1 - get pull from repo or download from download button. <br/>
+1 - get clone repo or download from download button. <br/>
 2 - run "pod install" to download required Pods (Alamofire/KeychainSwift). <br/>
 3 - open project in XCode and it should be working fine. <br/>
 
