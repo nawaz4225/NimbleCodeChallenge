@@ -70,7 +70,7 @@ class MainPageVM {
     /// - Parameters:
     ///   - previousIndex: previous visible survey index
     ///   - isAfter: if transition is forward
-    func nextPageVC(previousIndex: Int, isAfter: Bool = true) -> SurveyDetailVC? {
+    func nextPageVC(with previousIndex: Int, isAfter: Bool = true) -> SurveyDetailVC? {
         let nextPageIndex = isAfter ? previousIndex + 1 : previousIndex - 1
         if nextPageIndex >= self.surveysData.count || nextPageIndex < 0 {
             return nil
@@ -97,8 +97,13 @@ extension MainPageVC: UIPageViewControllerDataSource,UIPageViewControllerDelegat
         guard let previousVC = (viewController as? SurveyDetailVC) else {
             return nil
         }
-        let previousIndex = previousVC.index
-        return self.viewModel.nextPageVC(previousIndex: previousIndex, isAfter: false)
+        
+        let previousIndex: Int = previousVC.index
+        if let currentVC = self.viewModel.nextPageVC(with: previousIndex, isAfter: false) {
+            currentVC.takeSurveyHandler = self
+            return currentVC
+        }
+        return self.viewModel.nextPageVC(with: previousIndex, isAfter: false)
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
@@ -107,9 +112,11 @@ extension MainPageVC: UIPageViewControllerDataSource,UIPageViewControllerDelegat
         }
         
         let previousIndex: Int = previousVC.index
-        if let currentVC = self.viewModel.nextPageVC(previousIndex: previousIndex) {
+        if let currentVC = self.viewModel.nextPageVC(with: previousIndex) {
             // load new data from server if user at 3rd last page
             self.loadNewDataFromServer(index: currentVC.index)
+            
+            currentVC.takeSurveyHandler = self
             return currentVC
         }
         
@@ -123,6 +130,19 @@ extension MainPageVC: UIPageViewControllerDataSource,UIPageViewControllerDelegat
             return
         }
         
+        
+        
         self.pageControl.currentPage = currentVC.index
     }
+}
+
+
+extension MainPageVC: TakeSurveyProtocol {
+    func takeSurveyPressed(with surveyModel: SurveyModel?) {
+        let networkStatusVC = self.storyboard?.instantiateViewController(withIdentifier: "NetworkStatusVC") as! NetworkStatusVC
+        
+        self.navigationController?.pushViewController(networkStatusVC, animated: true)
+    }
+    
+    
 }

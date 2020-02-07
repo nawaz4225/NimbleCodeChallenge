@@ -7,6 +7,11 @@
 //
 
 import UIKit
+
+protocol TakeSurveyProtocol {
+    func takeSurveyPressed(with surveyModel: SurveyModel?)
+}
+
 class SurveyDetailVC: UIViewController {
     
     var index: Int = 0
@@ -15,6 +20,7 @@ class SurveyDetailVC: UIViewController {
     @IBOutlet weak var descriptionLbl: UILabel!
     @IBOutlet weak var surveyBtn: UIButton!
     @IBOutlet weak var uiPageControl: UIPageControl!
+    var takeSurveyHandler: TakeSurveyProtocol?
     
     @IBOutlet weak var coverImage: CachedImageView!
     
@@ -30,8 +36,7 @@ class SurveyDetailVC: UIViewController {
     
     
     @IBAction func takeSurveyAction(_ sender: UIButton) {
-        
-        
+        takeSurveyHandler?.takeSurveyPressed(with: self.surveyModel)
     }
     
 }

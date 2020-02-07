@@ -68,20 +68,20 @@ class NimbleCodeChallengeTests: XCTestCase {
     }
     
     func testSrollForwardAtLastPage() {
-        XCTAssertNil(self.viewModel.nextPageVC(previousIndex: self.viewModel.surveysData.count))
+        XCTAssertNil(self.viewModel.nextPageVC(with: self.viewModel.surveysData.count))
     }
     
     
     func testScrollAtLastPage() {
-        XCTAssertNotNil(self.viewModel.nextPageVC(previousIndex: self.viewModel.surveysData.count, isAfter: false))
+        XCTAssertNotNil(self.viewModel.nextPageVC(with: self.viewModel.surveysData.count, isAfter: false))
     }
     
     func testScrollBackwardFromFirstPage() {
-        XCTAssertNil(self.viewModel.nextPageVC(previousIndex: 0, isAfter: false))
+        XCTAssertNil(self.viewModel.nextPageVC(with: 0, isAfter: false))
     }
     
     func testScrollForwardFromFirstPage() {
-        XCTAssertNotNil(self.viewModel.nextPageVC(previousIndex: 0))
+        XCTAssertNotNil(self.viewModel.nextPageVC(with: 0))
     }
 
     
