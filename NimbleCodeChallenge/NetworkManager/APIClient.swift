@@ -29,6 +29,8 @@ class APIClient {
     // pod KeychainSwift object to easy read write into keychain
     private let keychain = KeychainSwift()
     
+    private var authModel: OathModel?
+    
     func makeApiRequest( requestMethod: HTTPMethod = .get
         , strURL url : String
         , parameter :  Dictionary<String, Any>?
@@ -47,6 +49,9 @@ class APIClient {
             "Accept": "application/json"
         ]
         
+        
+        
+        
         if let authModel = self.retriveAuthModel(),  authModel.isValidAccessToken() {
             apiHeaders["Authorization"] = "Bearer \(authModel.accessToken)"
             self.almofireJSONrequest(strURL: url, parameter: param, apiHeaders: apiHeaders) { [weak self] (responseData, error) in
@@ -64,6 +69,8 @@ class APIClient {
                     print("Authentication Failed!")
                     return
                 }
+                
+                strongSelf.authModel = authModel
                 apiHeaders["Authorization"] = "Bearer \(authModel.accessToken)"
                 strongSelf.almofireJSONrequest(strURL: url, parameter: param, apiHeaders: apiHeaders) { [weak self] (responseData, error) in
                     guard let _ = self else {
@@ -167,6 +174,11 @@ class APIClient {
     
     /// retrieve saved Oath Data from keychain
     private func retriveAuthModel() -> OathModel?{
+        
+        if let authModel = self.authModel {
+            return authModel
+        }
+        
         guard let authData = keychain.getData("auth_data") else {
             return nil
         }
@@ -175,6 +187,7 @@ class APIClient {
         guard let authModel = try? decoder.decode(OathModel.self, from: authData) else {
             return nil
         }
+        self.authModel = authModel
         
         return authModel
     }
