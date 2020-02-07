@@ -18,8 +18,6 @@ class CachedImageView: UIImageView {
         self.image = nil
         self.backgroundColor = bgColor
         self.urlStringForChecking = urlString
-        
-        
         let urlKey = urlString as NSString
         
         if let cachedItem = CachedImageView.imageCache.object(forKey: urlKey) {
@@ -35,8 +33,6 @@ class CachedImageView: UIImageView {
             guard let strongSelf = self else {
                 return
             }
-            
-            
             if error != nil {
                 return
             }

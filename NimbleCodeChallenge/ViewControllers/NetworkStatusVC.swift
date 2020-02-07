@@ -12,8 +12,12 @@ class NetworkStatusVC: UIViewController {
 
     @IBOutlet weak var retryBtn: UIButton!
     @IBOutlet weak var statusLbl: UILabel!
+    
+    var errorMsg: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.statusLbl.text = errorMsg
 
         // Do any additional setup after loading the view.
     }

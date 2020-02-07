@@ -9,7 +9,7 @@
 import UIKit
 class SurveyDetailVC: UIViewController {
     
-    var index = 0
+    var index: Int = 0
     var surveyModel: SurveyModel?
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var descriptionLbl: UILabel!

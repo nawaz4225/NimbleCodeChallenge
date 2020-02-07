@@ -8,16 +8,26 @@
 
 import Foundation
 import Alamofire
+import KeychainSwift
 
-let BASE_URL = "https://nimble-survey-api.herokuapp.com/"
-let authURL = "\(BASE_URL)oauth/token"
-let surveysURL = "\(BASE_URL)surveys.json"
+
+let BASE_URL: String = "https://nimble-survey-api.herokuapp.com/"
+let authURL: String = "\(BASE_URL)oauth/token"
+let surveysURL: String = "\(BASE_URL)surveys.json"
+
+enum NetworkingErrors: Error {
+    case errorParsingJSON
+    case noInternetConnection
+    case dataReturnedNil
+    case returnedError(Error)
+    case invalidStatusCode(Int)
+    case customError(String)
+}
 
 class APIClient {
     static let sharedManager = APIClient()
-    var isLoading = false
-    var authModel: OathModel?
-    
+    // pod KeychainSwift object to easy read write into keychain
+    private let keychain = KeychainSwift()
     
     func makeApiRequest( requestMethod: HTTPMethod = .get
         , strURL url : String
@@ -25,9 +35,8 @@ class APIClient {
         , withErrorAlert errorAlert : Bool = false
         , withLoader isLoader : Bool = true
         , apiEncoding: ParameterEncoding = JSONEncoding.default
-        , withBlock completion : @escaping (Data?, Error?) -> Void){
+        , withBlock completion : @escaping (Data?, NetworkingErrors?) -> Void){
         
-        self.isLoading = true
         
         var param = Dictionary<String,Any>()
         if parameter != nil {
@@ -38,27 +47,30 @@ class APIClient {
             "Accept": "application/json"
         ]
         
-        if authModel == nil || (authModel?.accessToken.isEmpty ?? false) {
-            self.getAuthToken {
-                apiHeaders["Authorization"] = "Bearer \(self.authModel?.accessToken ?? "")"
-                self.almofireJSONrequest(strURL: url, parameter: param, apiHeaders: apiHeaders) { [weak self] (responseData, error) in
-                    guard let strongSelf = self else {
-                        return
-                    }
-                    strongSelf.isLoading = false
-                    
-                    completion(responseData, error)
-                }
-            }
-        } else {
-            apiHeaders["Authorization"] = "Bearer \(self.authModel?.accessToken ?? "")"
+        if let authModel = self.retriveAuthModel(),  authModel.isValidAccessToken() {
+            apiHeaders["Authorization"] = "Bearer \(authModel.accessToken)"
             self.almofireJSONrequest(strURL: url, parameter: param, apiHeaders: apiHeaders) { [weak self] (responseData, error) in
-                guard let strongSelf = self else {
+                guard let _ = self else {
                     return
                 }
-                strongSelf.isLoading = false
-                
                 completion(responseData, error)
+            }
+        } else {
+            self.getAuthToken { [weak self] authModel in
+                guard let strongSelf = self else  {
+                    return
+                }
+                guard let authModel = authModel else {
+                    print("Authentication Failed!")
+                    return
+                }
+                apiHeaders["Authorization"] = "Bearer \(authModel.accessToken)"
+                strongSelf.almofireJSONrequest(strURL: url, parameter: param, apiHeaders: apiHeaders) { [weak self] (responseData, error) in
+                    guard let _ = self else {
+                        return
+                    }
+                    completion(responseData, error)
+                }
             }
         }
     }
@@ -67,10 +79,10 @@ class APIClient {
     private func almofireJSONrequest(requestMethod: HTTPMethod = .get
         , strURL url : String
         , parameter :  Dictionary<String, Any>?
-        , debugInfo isPrint : Bool = false
+        , debugInfo isPrint : Bool = true
         , apiHeaders: Dictionary<String, String>
         , apiEncoding: ParameterEncoding = JSONEncoding.default
-        , withBlock completion : @escaping (Data?, Error?) -> Void){
+        , withBlock completion : @escaping (Data?, NetworkingErrors?) -> Void){
         
         if isPrint {
             print("*****************URL***********************\n")
@@ -78,36 +90,38 @@ class APIClient {
             print("Parameter:-\(String(describing: parameter))\n")
             print("MethodType:- \(requestMethod.rawValue)\n")
             print("headers:-\(String(describing: apiHeaders))\n")
-            
             print("*****************End***********************\n")
         }
-        
-        
         var encodingScheme: ParameterEncoding = apiEncoding
         if requestMethod == .get {
             encodingScheme = URLEncoding.default
         }
         
-        
-        
         Alamofire.request(url, method: requestMethod, parameters: parameter, encoding: encodingScheme, headers: apiHeaders).responseJSON(completionHandler: { (response) in
             
             switch(response.result) {
             case .success(let JSON):
+                if isPrint {
+                    print(JSON)
+                }
+                
                 DispatchQueue.main.async {
-                    if isPrint {
-                        print(JSON)
+                    if response.response!.statusCode == 200 {
+                        //do things
+                        completion(response.data, nil)
+                    }else if response.response!.statusCode == 401 {
+                        //authorization failed Error
+                        completion(nil, .customError("Authentication Failed!"))
                     }
-                    completion(response.data, nil)
                 }
                 
             case .failure(let error):
+                if isPrint {
+                    print(error.localizedDescription)
+                }
                 
                 DispatchQueue.main.async {
-                    if isPrint {
-                        print(error.localizedDescription)
-                    }
-                    completion(nil, error)
+                    completion(nil, .returnedError(error))
                 }
             }
         })
@@ -115,7 +129,9 @@ class APIClient {
     
     
     
-    private func getAuthToken(_ completion: @escaping ()->Void) {
+    /// Retrive authData from Server
+    /// - Parameter completion: callback
+    private func getAuthToken(_ completion: @escaping (OathModel?)->Void) {
         
         let params = ["grant_type": "password",
                       "username": "carlos@nimbl3.com",
@@ -130,17 +146,37 @@ class APIClient {
             guard let strongSelf = self else {
                 return
             }
+            var authModel: OathModel?
             do{
                 let decoder = JSONDecoder()
                 if let responseData = responseData {
-                    strongSelf.authModel = try decoder.decode(OathModel.self, from: responseData)
+                    authModel = try decoder.decode(OathModel.self, from: responseData)
+                    // save auth data into keychain
+                    strongSelf.keychain.set(responseData, forKey: "auth_data")
+                    
                 }
                 
             }catch let error {
                 print(error.localizedDescription)
             }
-            completion()
+            
+            completion(authModel)
         }
         
     }
+    
+    /// retrieve saved Oath Data from keychain
+    private func retriveAuthModel() -> OathModel?{
+        guard let authData = keychain.getData("auth_data") else {
+            return nil
+        }
+        
+        let decoder = JSONDecoder()
+        guard let authModel = try? decoder.decode(OathModel.self, from: authData) else {
+            return nil
+        }
+        
+        return authModel
+    }
+
 }

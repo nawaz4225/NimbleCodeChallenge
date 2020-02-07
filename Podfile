@@ -8,10 +8,10 @@ target 'NimbleCodeChallenge' do
   # Pods for NimbleCodeChallenge
 
   pod 'Alamofire'
+  pod 'KeychainSwift'
   
   target 'NimbleCodeChallengeTests' do
     inherit! :search_paths
-    pod 'Alamofire'
     # Pods for testing
   end
 

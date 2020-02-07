@@ -87,7 +87,7 @@
                                 <color key="textColor" red="0.99215686270000003" green="0.99215686270000003" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WzE-x4-580">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WzE-x4-580">
                                 <rect key="frame" x="84" y="592" width="207" height="50"/>
                                 <color key="backgroundColor" red="0.89411764709999997" green="0.0039975355620000003" blue="0.061858409060000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -98,6 +98,11 @@
                                 <state key="normal" title="Take the survey">
                                     <color key="titleColor" red="0.99215686270000003" green="0.99215686270000003" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="takeSurveyAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Q5f-5K-N9w"/>
                                 </connections>
@@ -144,35 +149,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading Data..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b9t-rS-WLx">
-                                <rect key="frame" x="20" y="263" width="335" height="31.5"/>
+                                <rect key="frame" x="20" y="318" width="335" height="31.5"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="26"/>
                                 <color key="textColor" red="0.99215686270000003" green="0.99215686270000003" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jnE-VP-Bep">
-                                <rect key="frame" x="149" y="314.5" width="77" height="38"/>
-                                <color key="backgroundColor" red="0.896068753" green="0.0039975355620000003" blue="0.061858409060000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <inset key="contentEdgeInsets" minX="20" minY="10" maxX="20" maxY="10"/>
-                                <state key="normal" title="Retry">
-                                    <color key="titleColor" red="0.99215686270000003" green="0.99215686270000003" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="retryButtonPressed:" destination="syt-J9-e0t" eventType="touchUpInside" id="kWV-aE-Mt5"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.4941176471" green="0.7725490196" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="jnE-VP-Bep" firstAttribute="centerX" secondItem="IUo-zb-ZNE" secondAttribute="centerX" id="4CS-x7-YOF"/>
-                            <constraint firstItem="jnE-VP-Bep" firstAttribute="top" secondItem="b9t-rS-WLx" secondAttribute="bottom" constant="20" id="Vxz-Dl-8lQ"/>
+                            <constraint firstItem="b9t-rS-WLx" firstAttribute="centerY" secondItem="IUo-zb-ZNE" secondAttribute="centerY" id="VDL-AY-qRi"/>
                             <constraint firstItem="b9t-rS-WLx" firstAttribute="leading" secondItem="ubl-Le-BlB" secondAttribute="leading" constant="20" id="gwP-iR-Gwr"/>
-                            <constraint firstItem="jnE-VP-Bep" firstAttribute="centerY" secondItem="IUo-zb-ZNE" secondAttribute="centerY" id="oVl-Vl-fGf"/>
                             <constraint firstItem="ubl-Le-BlB" firstAttribute="trailing" secondItem="b9t-rS-WLx" secondAttribute="trailing" constant="20" id="v6p-2X-Yoo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ubl-Le-BlB"/>
                     </view>
                     <connections>
-                        <outlet property="retryBtn" destination="jnE-VP-Bep" id="1Gg-jM-PJp"/>
                         <outlet property="statusLbl" destination="b9t-rS-WLx" id="IaL-Xi-Lyw"/>
                     </connections>
                 </viewController>

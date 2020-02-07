@@ -278,7 +278,6 @@
 				FAB7E67C23E5DF400007D438 /* Sources */,
 				FAB7E67D23E5DF400007D438 /* Frameworks */,
 				FAB7E67E23E5DF400007D438 /* Resources */,
-				80AF6D93B925A4DC5420EF80 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -380,23 +379,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		80AF6D93B925A4DC5420EF80 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NimbleCodeChallengeTests/Pods-NimbleCodeChallengeTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NimbleCodeChallengeTests/Pods-NimbleCodeChallengeTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NimbleCodeChallengeTests/Pods-NimbleCodeChallengeTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		89FAD6DB9FE36B42F4894BD8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

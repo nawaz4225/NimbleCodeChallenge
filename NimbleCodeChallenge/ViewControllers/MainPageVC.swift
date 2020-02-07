@@ -18,6 +18,8 @@ class MainPageVC: UIViewController {
     var pageContainer: UIPageViewController!
     
     let viewModel = MainPageVM()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.pageContainer = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .vertical, options: nil)
@@ -43,36 +45,62 @@ class MainPageVC: UIViewController {
     }
     
     /// Loading Surveys data from Server
-    /// - Parameter isRefresh: if refreshing from to left nav button
+    /// - Parameter isRefresh: isRefresh = true = loading first time or loading from nav bar refresh button
     func loadSurveysData(isRefresh: Bool = false) {
         // View Controller to handle network status / loading / errors
         if isRefresh {
-            self.pageControl.numberOfPages = 0
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "NetworkStatusVC") as! NetworkStatusVC
-            self.pageContainer.setViewControllers([vc], direction: .forward, animated: false, completion: nil)
+            // disable multiple refreshing
+            self.navigationItem.leftBarButtonItem?.isEnabled = false
+            self.showNetworkStatusVC(with: "Loading Data...")
         }
-        self.viewModel.loadSurveyFromServer(isRefresh: isRefresh) { error in
-            if let error = error {
-//                vc.statusLbl.text = error.localizedDescription
-//                vc.retryBtn.isHidden = false
+        
+        
+        self.viewModel.loadSurveyFromServer(with: isRefresh) { [weak self] error in
+            
+            guard let strongSelf = self else {
                 return
             }
+            strongSelf.navigationItem.leftBarButtonItem?.isEnabled = true
             
-            let dataCount: Int = self.viewModel.surveysData.count
-            self.refreshDataSource()
+            let dataCount: Int = strongSelf.viewModel.surveysData.count
+            
+            if let error = error {
+                
+                //show network error message if refresh or first page load failed
+                if isRefresh {
+                    //                vc.statusLbl.text = error.localizedDescription
+                    strongSelf.showNetworkStatusVC(with: error.localizedDescription)
+                    //                vc.retryBtn.isHidden = false
+                    
+                    return
+                }
+            } else {
+                strongSelf.refreshDataSource()
+            }
             
             if dataCount > 0  {
                 if isRefresh {
-                    let firstVC = self.viewModel.initiateNextVC(for: 0)!
-                    self.pageContainer.setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
-                    self.pageControl.currentPage = 0
+                    let firstVC = strongSelf.viewModel.initiateNextVC(for: 0)!
+                    strongSelf.pageContainer.setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
+                    strongSelf.pageControl.currentPage = 0
                 }
-                if self.pageControl.numberOfPages != dataCount {
-                    self.pageControl.numberOfPages = dataCount
-                    self.pcTrailing.constant = -((self.pageControl.bounds.width/2) + 20)
+                if strongSelf.pageControl.numberOfPages != dataCount {
+                    strongSelf.pageControl.numberOfPages = dataCount
+                    strongSelf.pcTrailing.constant = -((strongSelf.pageControl.bounds.width/2) + 20)
                 }
             }
         }
+    }
+    
+    
+    /// load NetworkStatusVC
+    /// - Parameter errorMsg: network error message or loading data
+    func showNetworkStatusVC(with errorMsg: String) {
+        self.pageControl.numberOfPages = 0
+        
+        let networkStatusVC = self.storyboard?.instantiateViewController(withIdentifier: "NetworkStatusVC") as! NetworkStatusVC
+        networkStatusVC.errorMsg = errorMsg
+        self.pageContainer.setViewControllers([networkStatusVC], direction: .forward, animated: false, completion: nil)
     }
     
     /// Refresh PagerView data source on new data load
