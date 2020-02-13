@@ -28,7 +28,7 @@ class SurveyDetailVC: UIViewController {
         if let surveyModel = self.surveyModel {
             self.titleLbl.text = surveyModel.title
             self.descriptionLbl.text = surveyModel.description
-            self.coverImage.loadImage(urlString: "\(surveyModel.coverImageUrl)l", bgColor: UIColor(hexString: surveyModel.theme.colorActive))
+            self.coverImage.loadImage(urlString: surveyModel.coverImageUrl, quality: .high, bgColor: UIColor(hexString: surveyModel.theme.colorActive))
         }
         // Do any additional setup after loading the view.
     }

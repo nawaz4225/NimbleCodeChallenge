@@ -8,16 +8,22 @@
 
 import UIKit
 
+enum ImageQualityFactory: String {
+    case low = ""
+    case high = "l"
+    
+}
+
 class CachedImageView: UIImageView {
     private static let imageCache = NSCache<NSString, UIImage>()
     
     private var urlStringForChecking: String?
     
     
-    func loadImage(urlString: String, bgColor: UIColor? = UIColor.gray) {
+    func loadImage(urlString: String, quality: ImageQualityFactory, bgColor: UIColor? = UIColor.gray) {
         self.image = nil
         self.backgroundColor = bgColor
-        self.urlStringForChecking = urlString
+        self.urlStringForChecking = "\(urlString)\(quality.rawValue)"
         let urlKey = urlString as NSString
         
         if let cachedItem = CachedImageView.self.imageCache.object(forKey: urlKey) {
