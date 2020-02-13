@@ -23,6 +23,7 @@
 		FAB7E69E23E5E2360007D438 /* MainPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB7E69D23E5E2360007D438 /* MainPageVC.swift */; };
 		FAB7E6A523E5E6720007D438 /* MainPageVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB7E6A423E5E6720007D438 /* MainPageVM.swift */; };
 		FAD0D97423E5F72500FFBE58 /* OathModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD0D97323E5F72500FFBE58 /* OathModel.swift */; };
+		FAE1364323F5EA34001E72F2 /* PageVCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE1364223F5EA34001E72F2 /* PageVCManager.swift */; };
 		FAFB964D23E8AE9C00AD7FBC /* SurveyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFB964C23E8AE9C00AD7FBC /* SurveyModel.swift */; };
 		FAFB965023E8B8F800AD7FBC /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFB964F23E8B8F800AD7FBC /* APIClient.swift */; };
 		FAFB965223E8EBE700AD7FBC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFB965123E8EBE700AD7FBC /* Extensions.swift */; };
@@ -74,6 +75,7 @@
 		FAB7E69D23E5E2360007D438 /* MainPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageVC.swift; sourceTree = "<group>"; };
 		FAB7E6A423E5E6720007D438 /* MainPageVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageVM.swift; sourceTree = "<group>"; };
 		FAD0D97323E5F72500FFBE58 /* OathModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OathModel.swift; sourceTree = "<group>"; };
+		FAE1364223F5EA34001E72F2 /* PageVCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageVCManager.swift; sourceTree = "<group>"; };
 		FAFB964C23E8AE9C00AD7FBC /* SurveyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyModel.swift; sourceTree = "<group>"; };
 		FAFB964F23E8B8F800AD7FBC /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		FAFB965123E8EBE700AD7FBC /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 		FAB7E66C23E5DF390007D438 /* NimbleCodeChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				FAE1364123F5E9FA001E72F2 /* AppManagers */,
 				FA2BD57523EA360F0089ACE9 /* CustomViews */,
 				FAFB964E23E8B8E000AD7FBC /* NetworkManager */,
 				FAB7E6A323E5E5C20007D438 /* Storyboards */,
@@ -238,6 +241,14 @@
 				FAB7E67323E5DF390007D438 /* Main.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		FAE1364123F5E9FA001E72F2 /* AppManagers */ = {
+			isa = PBXGroup;
+			children = (
+				FAE1364223F5EA34001E72F2 /* PageVCManager.swift */,
+			);
+			path = AppManagers;
 			sourceTree = "<group>";
 		};
 		FAFB964E23E8B8E000AD7FBC /* NetworkManager */ = {
@@ -489,6 +500,7 @@
 				FAB7E67223E5DF390007D438 /* SurveyDetailVC.swift in Sources */,
 				FAFB965223E8EBE700AD7FBC /* Extensions.swift in Sources */,
 				FA2BD57723EA362A0089ACE9 /* CachedImageView.swift in Sources */,
+				FAE1364323F5EA34001E72F2 /* PageVCManager.swift in Sources */,
 				FAD0D97423E5F72500FFBE58 /* OathModel.swift in Sources */,
 				FAB7E6A523E5E6720007D438 /* MainPageVM.swift in Sources */,
 				FAB7E66E23E5DF390007D438 /* AppDelegate.swift in Sources */,

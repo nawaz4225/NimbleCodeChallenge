@@ -27,22 +27,26 @@ struct DummySurveys {
 
 class NimbleCodeChallengeTests: XCTestCase {
     
+    let invalidIndex = -1
     var viewModel: MainPageVM!
     var dumySurveyGenerator: DummySurveys!
     var authModel: OathModel!
-    
+    var pageManager: PageVCManager!
     var perPageLimit: Int!
     var newloadDataindex: Int!
     var newdataLoadIndex: Int!
     
     override func setUp() {
         self.viewModel = MainPageVM()
+        self.pageManager = PageVCManager()
         self.dumySurveyGenerator = DummySurveys()
         self.perPageLimit = self.viewModel.perPageLimit
         let dummySurveys = self.dumySurveyGenerator.createDummySurveys(size: 10)
         self.viewModel.surveysData.append(contentsOf: dummySurveys)
         self.newdataLoadIndex = self.viewModel.surveysData.count - self.viewModel.loadDataThreshold
         self.authModel = OathModel(accessToken: "", tokenType: "", expiresIn: 7200, createdAt: Int64(Date().timeIntervalSince1970))
+        
+        self.pageManager.setTotalPageCount(count: self.viewModel.surveysData.count)
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
@@ -68,20 +72,24 @@ class NimbleCodeChallengeTests: XCTestCase {
     }
     
     func testSrollForwardAtLastPage() {
-        XCTAssertNil(self.viewModel.nextPageVC(with: self.viewModel.surveysData.count))
+        XCTAssertEqual(self.pageManager.nextPageIndex(with: self.viewModel.surveysData.count), self.invalidIndex, "invalid index when move forward at last page")
     }
     
     
-    func testScrollAtLastPage() {
-        XCTAssertNotNil(self.viewModel.nextPageVC(with: self.viewModel.surveysData.count, isAfter: false))
+    func testScrollBackAtLastPage() {
+        let pageIndex = self.pageManager.nextPageIndex(with: self.viewModel.surveysData.count, isAfter: false)
+        XCTAssertEqual(pageIndex, self.viewModel.surveysData.count - 1)
     }
     
     func testScrollBackwardFromFirstPage() {
-        XCTAssertNil(self.viewModel.nextPageVC(with: 0, isAfter: false))
+        let pageIndex = self.pageManager.nextPageIndex(with: 0, isAfter: false)
+        XCTAssertEqual(pageIndex, self.invalidIndex)
     }
     
     func testScrollForwardFromFirstPage() {
-        XCTAssertNotNil(self.viewModel.nextPageVC(with: 0))
+        let pageIndex = self.pageManager.nextPageIndex(with: 0)
+        XCTAssertTrue(self.viewModel.surveysData.count > 0)
+        XCTAssertEqual(pageIndex, 1)
     }
     
     

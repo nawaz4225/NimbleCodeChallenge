@@ -15,7 +15,9 @@ class MainPageVC: UIViewController {
     @IBOutlet var pcTrailing: NSLayoutConstraint!
     
     // The UIPageViewController
-    var pageContainer: UIPageViewController!
+    private var pageContainer: UIPageViewController!
+    
+    public let pageManager = PageVCManager()
     
     let viewModel = MainPageVM()
     
@@ -54,7 +56,6 @@ class MainPageVC: UIViewController {
             self.showNetworkStatusVC(with: "Loading Data...")
         }
         
-        
         self.viewModel.loadSurveyFromServer(with: isRefresh) { [weak self] error in
             
             guard let strongSelf = self else {
@@ -75,14 +76,15 @@ class MainPageVC: UIViewController {
                     return
                 }
             } else {
-                strongSelf.refreshDataSource()
+                strongSelf.refreshDataSource(count: dataCount)
             }
             
             if dataCount > 0  {
                 if isRefresh {
-                    let firstVC = strongSelf.viewModel.initiateNextVC(for: 0)!
-                    strongSelf.pageContainer.setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
-                    strongSelf.pageControl.currentPage = 0
+                    if let firstVC = strongSelf.setUpNextVC(pageIndex: 0) {
+                        strongSelf.pageContainer.setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
+                        strongSelf.pageControl.currentPage = 0
+                    }
                 }
                 if strongSelf.pageControl.numberOfPages != dataCount {
                     strongSelf.pageControl.numberOfPages = dataCount
@@ -104,9 +106,11 @@ class MainPageVC: UIViewController {
     }
     
     /// Refresh PagerView data source on new data load
-    func refreshDataSource() {
+    func refreshDataSource(count: Int) {
+        self.pageManager.setTotalPageCount(count: count)
         self.pageContainer.dataSource = nil
         self.pageContainer.dataSource = self
+        
     }
     
     /// Load new surveys from server if user scrolled to 3rd last page
@@ -121,6 +125,32 @@ class MainPageVC: UIViewController {
         super.viewWillDisappear(animated)
         CachedImageView.clearImageCache()
     }
+    
+    
+    func setUpNextVC(pageIndex: Int) -> SurveyDetailVC? {
+        
+        // invalid when navigating back at first controller and forward at last controller
+        if pageIndex == self.pageManager.invalidIndex {
+            return nil
+        }
+        
+        if  self.viewModel.surveysData.count > pageIndex {
+            let data = self.viewModel.surveysData[pageIndex]
+            return self.pageManager.initiateNextVC(for: pageIndex, with: data)
+        }
+        return nil
+        
+    }
+    
+    
 }
 
-
+extension MainPageVC: TakeSurveyProtocol {
+    func takeSurveyPressed(with surveyModel: SurveyModel?) {
+        let networkStatusVC = self.storyboard?.instantiateViewController(withIdentifier: "NetworkStatusVC") as! NetworkStatusVC
+        
+        self.navigationController?.pushViewController(networkStatusVC, animated: true)
+    }
+    
+    
+}

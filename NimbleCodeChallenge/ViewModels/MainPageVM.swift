@@ -7,13 +7,12 @@
 //
 
 import Foundation
-import UIKit
 
 class MainPageVM {
-    let perPageLimit: Int = 5
+    private let perPageLimit: Int = 5
     // load new data when reach 2rd last item
-    let loadDataThreshold: Int = 2
-    var surveysData: [SurveyModel] = [SurveyModel]()
+    private let loadDataThreshold: Int = 2
+    public var surveysData: [SurveyModel] = [SurveyModel]()
     
     typealias fetchSurveysCompletion =  ((Error?)->Void)
     
@@ -65,84 +64,5 @@ class MainPageVM {
         // already have complete data from server
         return false
     }
-    
-    /// function to get next visible survey vc
-    /// - Parameters:
-    ///   - previousIndex: previous visible survey index
-    ///   - isAfter: if transition is forward
-    func nextPageVC(with previousIndex: Int, isAfter: Bool = true) -> SurveyDetailVC? {
-        let nextPageIndex = isAfter ? previousIndex + 1 : previousIndex - 1
-        if nextPageIndex >= self.surveysData.count || nextPageIndex < 0 {
-            return nil
-        }
-        return self.initiateNextVC(for: nextPageIndex)
-        
-    }
-    
-    /// intialize SurveyDetailVC next to be visible
-    /// - Parameter index: index in uipagerview
-    func initiateNextVC(for index: Int) -> SurveyDetailVC? {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "SurveyDetailVC") as? SurveyDetailVC
-        vc?.index = index
-        vc?.surveyModel = self.surveysData[index]
-        return vc
-    }
-}
-
-
-
-extension MainPageVC: UIPageViewControllerDataSource,UIPageViewControllerDelegate {
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let previousVC = (viewController as? SurveyDetailVC) else {
-            return nil
-        }
-        
-        let previousIndex: Int = previousVC.index
-        if let currentVC = self.viewModel.nextPageVC(with: previousIndex, isAfter: false) {
-            currentVC.takeSurveyHandler = self
-            return currentVC
-        }
-        return self.viewModel.nextPageVC(with: previousIndex, isAfter: false)
-    }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let previousVC = (viewController as? SurveyDetailVC) else {
-            return nil
-        }
-        
-        let previousIndex: Int = previousVC.index
-        if let currentVC = self.viewModel.nextPageVC(with: previousIndex) {
-            // load new data from server if user at 3rd last page
-            self.loadNewDataFromServer(index: currentVC.index)
-            
-            currentVC.takeSurveyHandler = self
-            return currentVC
-        }
-        
-        return nil
-    }
-    
-    
-    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        guard completed else { return }
-        guard let currentVC = pageViewController.viewControllers?.first as? SurveyDetailVC else {
-            return
-        }
-        
-        
-        
-        self.pageControl.currentPage = currentVC.index
-    }
-}
-
-
-extension MainPageVC: TakeSurveyProtocol {
-    func takeSurveyPressed(with surveyModel: SurveyModel?) {
-        let networkStatusVC = self.storyboard?.instantiateViewController(withIdentifier: "NetworkStatusVC") as! NetworkStatusVC
-        
-        self.navigationController?.pushViewController(networkStatusVC, animated: true)
-    }
-    
     
 }
