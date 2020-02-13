@@ -16,7 +16,7 @@ struct DummySurveys {
         var surveysData = [SurveyModel]()
         
         let dumyTheme = Theme(colorActive: "", colorInactive: "", colorQuestion: "", colorAnswerNormal: "", colorAnswerInactive: "")
-        let dumySurvey = SurveyModel.init(id: "", title: "", description: "", coverImageUrl: "", theme: dumyTheme)
+        let dumySurvey = SurveyModel(id: "", title: "", description: "", coverImageUrl: "", theme: dumyTheme)
         for _ in 0...size - 1 {
             surveysData.append(dumySurvey)
         }

@@ -29,7 +29,7 @@ class MainPageVC: UIViewController {
         view.addSubview(self.pageContainer.view)
         // Configure our custom pageControl
         if let image = UIImage.outlinedEllipse(size: CGSize(width: 7.0, height: 7.0), color: .white) {
-            self.pageControl.pageIndicatorTintColor = UIColor.init(patternImage: image)
+            self.pageControl.pageIndicatorTintColor = UIColor(patternImage: image)
             self.pageControl.currentPageIndicatorTintColor = .white
         }
         self.pageControl.transform = CGAffineTransform(rotationAngle: (.pi / 2))
