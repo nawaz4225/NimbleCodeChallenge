@@ -33,11 +33,10 @@ class PageVCManager {
     
     /// intialize SurveyDetailVC next to be visible
     /// - Parameter index: index in uipagerview
-    public func initiateNextVC(for index: Int, with data: SurveyModel) -> SurveyDetailVC? {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "SurveyDetailVC") as? SurveyDetailVC
-        vc?.index = index
-        vc?.surveyModel = data
+    public func initiateNextVC(for index: Int, with data: SurveyModel) -> SurveyDetailVC {
+        let vc = SurveyDetailVC.instantiate(from: .Main)
+        vc.index = index
+        vc.surveyModel = data
         return vc
     }
     

@@ -100,7 +100,7 @@ class MainPageVC: UIViewController {
     func showNetworkStatusVC(with errorMsg: String) {
         self.pageControl.numberOfPages = 0
         
-        let networkStatusVC = self.storyboard?.instantiateViewController(withIdentifier: "NetworkStatusVC") as! NetworkStatusVC
+        let networkStatusVC = NetworkStatusVC.instantiate(from: .Main)
         networkStatusVC.errorMsg = errorMsg
         self.pageContainer.setViewControllers([networkStatusVC], direction: .forward, animated: false, completion: nil)
     }
@@ -147,7 +147,7 @@ class MainPageVC: UIViewController {
 
 extension MainPageVC: TakeSurveyProtocol {
     func takeSurveyPressed(with surveyModel: SurveyModel?) {
-        let networkStatusVC = self.storyboard?.instantiateViewController(withIdentifier: "NetworkStatusVC") as! NetworkStatusVC
+        let networkStatusVC = NetworkStatusVC.instantiate(from: .Main)
         
         self.navigationController?.pushViewController(networkStatusVC, animated: true)
     }
