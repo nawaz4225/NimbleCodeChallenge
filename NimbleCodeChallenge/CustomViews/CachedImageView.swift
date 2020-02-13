@@ -20,7 +20,7 @@ class CachedImageView: UIImageView {
         self.urlStringForChecking = urlString
         let urlKey = urlString as NSString
         
-        if let cachedItem = CachedImageView.imageCache.object(forKey: urlKey) {
+        if let cachedItem = CachedImageView.self.imageCache.object(forKey: urlKey) {
             self.image = cachedItem
             return
         }
@@ -39,7 +39,7 @@ class CachedImageView: UIImageView {
             
             DispatchQueue.main.async {
                 if let imageData = data,  let image = UIImage(data: imageData) {
-                    CachedImageView.imageCache.setObject(image, forKey: urlKey)
+                    CachedImageView.self.imageCache.setObject(image, forKey: urlKey)
                     if urlString == strongSelf.urlStringForChecking {
                         strongSelf.image = image
                     }
@@ -50,7 +50,7 @@ class CachedImageView: UIImageView {
     }
     
     public static func clearImageCache(){
-        self.imageCache.removeAllObjects()
+        CachedImageView.imageCache.removeAllObjects()
     }
     
 }

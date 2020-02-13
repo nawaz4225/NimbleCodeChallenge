@@ -76,7 +76,7 @@ class MainPageVM {
             return nil
         }
         return self.initiateNextVC(for: nextPageIndex)
-            
+        
     }
     
     /// intialize SurveyDetailVC next to be visible

@@ -20,23 +20,23 @@ extension UIColor {
         default: return nil
         }
         self.init(red: .init(strtoul(String(chars[2...3]), nil, 16)) / 255,
-                green: .init(strtoul(String(chars[4...5]), nil, 16)) / 255,
-                 blue: .init(strtoul(String(chars[6...7]), nil, 16)) / 255,
-                alpha: .init(strtoul(String(chars[0...1]), nil, 16)) / 255)
+                  green: .init(strtoul(String(chars[4...5]), nil, 16)) / 255,
+                  blue: .init(strtoul(String(chars[6...7]), nil, 16)) / 255,
+                  alpha: .init(strtoul(String(chars[0...1]), nil, 16)) / 255)
     }
 }
 
 /// An extension to `UIImage` for creating images with shapes.
 extension UIImage {
-
+    
     /// Creates a circular outline image.
     class func outlinedEllipse(size: CGSize, color: UIColor, lineWidth: CGFloat = 1.0) -> UIImage? {
-
+        
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
         guard let context = UIGraphicsGetCurrentContext() else {
-                return nil
+            return nil
         }
-
+        
         context.setStrokeColor(color.cgColor)
         context.setLineWidth(lineWidth)
         // Inset the rect to account for the fact that strokes are
@@ -44,7 +44,7 @@ extension UIImage {
         let rect = CGRect(origin: .zero, size: size).insetBy(dx: lineWidth * 0.5, dy: lineWidth * 0.5)
         context.addEllipse(in: rect)
         context.strokePath()
-
+        
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image
@@ -56,7 +56,7 @@ extension UIImage {
 /// UIView Extension
 
 extension UIView {
-   
+    
     @IBInspectable var cornerRadius: CGFloat {
         get {
             return layer.cornerRadius
@@ -66,7 +66,7 @@ extension UIView {
             layer.masksToBounds = newValue > 0
         }
     }
-
+    
     @IBInspectable var borderWidth: CGFloat {
         get {
             return layer.borderWidth
@@ -75,7 +75,7 @@ extension UIView {
             layer.borderWidth = newValue
         }
     }
-
+    
     @IBInspectable var borderColor: UIColor? {
         get {
             return UIColor(cgColor: layer.borderColor!)
@@ -84,7 +84,7 @@ extension UIView {
             layer.borderColor = newValue?.cgColor
         }
     }
-
+    
     //for shadow
     @IBInspectable var shadowRadius: CGFloat {
         get {
@@ -94,7 +94,7 @@ extension UIView {
             layer.shadowRadius = newValue
         }
     }
-
+    
     @IBInspectable var shadowOpacity: Float {
         get {
             return layer.shadowOpacity
@@ -103,7 +103,7 @@ extension UIView {
             layer.shadowOpacity = newValue
         }
     }
-
+    
     @IBInspectable var shadowOffset: CGSize {
         get {
             return layer.shadowOffset
@@ -112,7 +112,7 @@ extension UIView {
             layer.shadowOffset = newValue
         }
     }
-
+    
     @IBInspectable var shadowColor: UIColor? {
         get {
             if let color = layer.shadowColor {

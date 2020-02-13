@@ -29,7 +29,7 @@ struct SurveyModel: Codable {
 struct Theme: Codable {
     let colorActive, colorInactive, colorQuestion, colorAnswerNormal: String
     let colorAnswerInactive: String
-
+    
     enum CodingKeys: String, CodingKey {
         case colorActive = "color_active"
         case colorInactive = "color_inactive"

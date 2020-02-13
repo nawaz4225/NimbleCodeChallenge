@@ -26,6 +26,7 @@ enum NetworkingErrors: Error {
 
 class APIClient {
     static let sharedManager = APIClient()
+    
     // pod KeychainSwift object to easy read write into keychain
     private let keychain = KeychainSwift()
     
@@ -179,7 +180,7 @@ class APIClient {
             return authModel
         }
         
-        guard let authData = keychain.getData("auth_data") else {
+        guard let authData = self.keychain.getData("auth_data") else {
             return nil
         }
         

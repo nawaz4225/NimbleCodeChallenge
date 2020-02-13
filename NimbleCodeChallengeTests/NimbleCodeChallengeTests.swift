@@ -26,7 +26,7 @@ struct DummySurveys {
 }
 
 class NimbleCodeChallengeTests: XCTestCase {
-
+    
     var viewModel: MainPageVM!
     var dumySurveyGenerator: DummySurveys!
     var authModel: OathModel!
@@ -45,7 +45,7 @@ class NimbleCodeChallengeTests: XCTestCase {
         self.authModel = OathModel(accessToken: "", tokenType: "", expiresIn: 7200, createdAt: Int64(Date().timeIntervalSince1970))
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
-
+    
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
@@ -83,7 +83,7 @@ class NimbleCodeChallengeTests: XCTestCase {
     func testScrollForwardFromFirstPage() {
         XCTAssertNotNil(self.viewModel.nextPageVC(with: 0))
     }
-
+    
     
     func testauthTokenNotExpired(){
         XCTAssertTrue(authModel.isValidAccessToken())
@@ -107,6 +107,4 @@ class NimbleCodeChallengeTests: XCTestCase {
         waitForExpectations(timeout: 10.0, handler: nil)
     }
     
-    
-
 }
