@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct SurveyModel: Codable {
+struct SurveyModel: Codable, ImageResolutionable {
     let id: String
     let title: String
     let description: String
