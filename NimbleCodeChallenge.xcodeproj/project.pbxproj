@@ -10,7 +10,6 @@
 		05693EE1862798FA410A61F8 /* Pods_NimbleCodeChallengeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A7D7A6127F198320257EE4B /* Pods_NimbleCodeChallengeTests.framework */; };
 		1E05D9E288998500D72D6989 /* Pods_NimbleCodeChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90F4022EDA010721167B78A1 /* Pods_NimbleCodeChallenge.framework */; };
 		4D2DF67A7B444784CFCDFF2B /* Pods_NimbleCodeChallenge_NimbleCodeChallengeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93BED338FC8947D5A4A1107B /* Pods_NimbleCodeChallenge_NimbleCodeChallengeUITests.framework */; };
-		FA258B0F23F8859E00138060 /* ImageResolutionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA258B0E23F8859E00138060 /* ImageResolutionable.swift */; };
 		FA2BD57723EA362A0089ACE9 /* CachedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2BD57623EA362A0089ACE9 /* CachedImageView.swift */; };
 		FAA5ECF123EB4B4A00BD87D9 /* NetworkStatusVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5ECF023EB4B4A00BD87D9 /* NetworkStatusVC.swift */; };
 		FAA5ECFA23EBC5D900BD87D9 /* NimbleCodeChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB7E68423E5DF400007D438 /* NimbleCodeChallengeTests.swift */; };
@@ -58,7 +57,6 @@
 		93BED338FC8947D5A4A1107B /* Pods_NimbleCodeChallenge_NimbleCodeChallengeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NimbleCodeChallenge_NimbleCodeChallengeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AB48888EEF30B54E9727027 /* Pods-NimbleCodeChallenge-NimbleCodeChallengeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NimbleCodeChallenge-NimbleCodeChallengeUITests.debug.xcconfig"; path = "Target Support Files/Pods-NimbleCodeChallenge-NimbleCodeChallengeUITests/Pods-NimbleCodeChallenge-NimbleCodeChallengeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		DDC77E78B7EDC8ADB41598ED /* Pods-NimbleCodeChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NimbleCodeChallenge.release.xcconfig"; path = "Target Support Files/Pods-NimbleCodeChallenge/Pods-NimbleCodeChallenge.release.xcconfig"; sourceTree = "<group>"; };
-		FA258B0E23F8859E00138060 /* ImageResolutionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResolutionable.swift; sourceTree = "<group>"; };
 		FA2BD57623EA362A0089ACE9 /* CachedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImageView.swift; sourceTree = "<group>"; };
 		FAA5ECF023EB4B4A00BD87D9 /* NetworkStatusVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatusVC.swift; sourceTree = "<group>"; };
 		FAB7E66A23E5DF390007D438 /* NimbleCodeChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NimbleCodeChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -136,14 +134,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		FA258B0D23F8855600138060 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				FA258B0E23F8859E00138060 /* ImageResolutionable.swift */,
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
 		FA2BD57523EA360F0089ACE9 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,7 +167,6 @@
 		FAB7E66C23E5DF390007D438 /* NimbleCodeChallenge */ = {
 			isa = PBXGroup;
 			children = (
-				FA258B0D23F8855600138060 /* Protocols */,
 				FAE1364123F5E9FA001E72F2 /* AppManagers */,
 				FA2BD57523EA360F0089ACE9 /* CustomViews */,
 				FAFB964E23E8B8E000AD7FBC /* NetworkManager */,
@@ -514,7 +503,6 @@
 				FAB7E67223E5DF390007D438 /* SurveyDetailVC.swift in Sources */,
 				FAFB965223E8EBE700AD7FBC /* Extensions.swift in Sources */,
 				FA2BD57723EA362A0089ACE9 /* CachedImageView.swift in Sources */,
-				FA258B0F23F8859E00138060 /* ImageResolutionable.swift in Sources */,
 				FAE1364323F5EA34001E72F2 /* PageVCManager.swift in Sources */,
 				FAD0D97423E5F72500FFBE58 /* OathModel.swift in Sources */,
 				FAB7E6A523E5E6720007D438 /* MainPageVM.swift in Sources */,
