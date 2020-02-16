@@ -10,10 +10,12 @@ import Foundation
 
 class MainPageVM {
     let loadDataThreshold: Int = 2
+    
+    private let apiClient: APIClient = APIClient()
     public var surveysData: [SurveyModel] = [SurveyModel]()
     
     private var pageController: PageControlModel = PageControlModel(with: 0)
-
+    
     
     typealias fetchSurveysCompletion =  ((Error?)->Void)
     
@@ -23,24 +25,26 @@ class MainPageVM {
         
         self.pageController = PageControlModel(with: self.nextPageNumber(with: isRefresh))
         
-        APIClient.sharedManager.makeApiRequest(requestMethod: .get, strURL: surveysURL,parameter: self.pageController) { [weak self] (responseData, error) in
-            
+        
+        apiClient.makeApiRequest(requestMethod: .get, strURL: surveysURL,parameter: self.pageController, responseType: [SurveyModel].self) { [weak self] response in
             guard let strongSelf = self else {
                 return
             }
-            if let resposeError = error {
-                completion(resposeError)
-                return
-            }
-            if let responseData = responseData {
-                if let serverData = responseData.decoded(as: [SurveyModel].self), serverData.count > 0 {
+            
+            switch (response) {
+            case .success(let surveyData):
+                if surveyData.count > 0 {
                     if isRefresh {
                         strongSelf.surveysData.removeAll()
                     }
-                    strongSelf.surveysData.append(contentsOf: serverData)
+                    strongSelf.surveysData.append(contentsOf: surveyData)
                     completion(nil)
                 }
+                
+            case .failure(let error):
+                completion(error)
             }
+            
         }
     }
     

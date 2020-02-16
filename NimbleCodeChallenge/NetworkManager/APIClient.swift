@@ -24,21 +24,28 @@ enum NetworkingErrors: Error {
     case customError(String)
 }
 
+enum MyResult<T, E: Error> {
+    case success(T)
+    case failure(NetworkingErrors)
+}
+
 class APIClient {
     
-    static let sharedManager = APIClient()
-    // pod KeychainSwift object to easy read write into keychain
     private let keychain = KeychainSwift()
     
-    private var authModel: OathModel?
+    private let manager: SessionManager
+    init(manager: SessionManager = SessionManager.default) {
+        self.manager = manager
+    }
     
-    func makeApiRequest( requestMethod: HTTPMethod = .get
+    
+    
+    func makeApiRequest<T: Decodable>( requestMethod: HTTPMethod = .get
         , strURL url : String
         , parameter :  JSONCodable?
-        , withErrorAlert errorAlert : Bool = false
-        , withLoader isLoader : Bool = true
         , apiEncoding: ParameterEncoding = JSONEncoding.default
-        , withBlock completion : @escaping (Data?, NetworkingErrors?) -> Void){
+        , responseType: T.Type
+        , withBlock completion :@escaping (MyResult<T, NetworkingErrors>) -> Void){
         
         var apiHeaders = [
             "Content-Type": "application/json",
@@ -47,11 +54,16 @@ class APIClient {
         
         if let authModel = self.retriveAuthModel(),  authModel.isValidAccessToken() {
             apiHeaders["Authorization"] = "Bearer \(authModel.accessToken)"
-            self.almofireJSONrequest(strURL: url, parameter: parameter, apiHeaders: apiHeaders) { [weak self] (responseData, error) in
+            self.almofireJSONrequest(strURL: url, parameter: parameter, apiHeaders: apiHeaders, responseType: responseType.self) { [weak self] response in
                 guard let _ = self else {
                     return
                 }
-                completion(responseData, error)
+                switch response {
+                case .success(let result):
+                    completion(.success(result))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
             }
         } else {
             self.getAuthToken { [weak self] authModel in
@@ -59,30 +71,36 @@ class APIClient {
                     return
                 }
                 guard let authModel = authModel else {
-                    print("Authentication Failed!")
                     return
                 }
-                
-                strongSelf.authModel = authModel
                 apiHeaders["Authorization"] = "Bearer \(authModel.accessToken)"
-                strongSelf.almofireJSONrequest(strURL: url, parameter: parameter, apiHeaders: apiHeaders) { [weak self] (responseData, error) in
+                strongSelf.almofireJSONrequest(strURL: url, parameter: parameter, apiHeaders: apiHeaders, responseType: responseType) { [weak self] response in
                     guard let _ = self else {
                         return
                     }
-                    completion(responseData, error)
+                    
+                    switch response {
+                    case .success(let result):
+                        completion(.success(result))
+                    case .failure(let error):
+                        completion(.failure(error))
+                    }
+                    
+                    
+                    
                 }
             }
         }
     }
     
     
-    private func almofireJSONrequest(requestMethod: HTTPMethod = .get
+    private func almofireJSONrequest<T: Decodable>(requestMethod: HTTPMethod = .get
         , strURL url : String
         , parameter :  JSONCodable?
-        , debugInfo isPrint : Bool = true
         , apiHeaders: Dictionary<String, String>
         , apiEncoding: ParameterEncoding = JSONEncoding.default
-        , withBlock completion : @escaping (Data?, NetworkingErrors?) -> Void){
+        , responseType: T.Type
+        , withBlock completion : @escaping (MyResult<T, NetworkingErrors>) -> Void){
         
         var encodingScheme: ParameterEncoding = apiEncoding
         if requestMethod == .get {
@@ -94,24 +112,26 @@ class APIClient {
             params = parameter.toDictionary() ?? [:]
         }
         
-        Alamofire.request(url, method: requestMethod, parameters: params, encoding: encodingScheme, headers: apiHeaders).responseJSON(completionHandler: { (response) in
+        self.manager.request(url, method: requestMethod, parameters: params, encoding: encodingScheme, headers: apiHeaders).responseJSON(completionHandler: { (response) in
             
             switch(response.result) {
             case .success( _):
-              
+                
                 DispatchQueue.main.async {
                     if response.response!.statusCode == 200 {
                         //do things
-                        completion(response.data, nil)
+                        if let responseData = response.data?.decoded(as: T.self) {
+                            completion(.success(responseData))
+                        }
                     }else if response.response!.statusCode == 401 {
                         //authorization failed Error
-                        completion(nil, .customError("Authentication Failed!"))
+                        completion(.failure(.customError("Authentication Failed!")))
                     }
                 }
                 
             case .failure(let error):
                 DispatchQueue.main.async {
-                    completion(nil, .returnedError(error))
+                    completion(.failure(.returnedError(error)))
                 }
             }
         })
@@ -124,39 +144,34 @@ class APIClient {
     private func getAuthToken(_ completion: @escaping (OathModel?)->Void) {
         
         let user = UserModel(grantType: "password",
-                                      userName: "carlos@nimbl3.com",
-                                      password: "antikera")
+                             userName: "carlos@nimbl3.com",
+                             password: "antikera")
         
-    
+        
         let apiHeaders = [
             "Content-Type": "application/json",
             "Accept": "application/json",
         ]
         
-        self.almofireJSONrequest(requestMethod: .post, strURL: authURL, parameter: user, apiHeaders: apiHeaders) { [weak self] (responseData, error) in
+        self.almofireJSONrequest(requestMethod: .post, strURL: authURL, parameter: user, apiHeaders: apiHeaders, responseType: OathModel.self) { [weak self] response in
             guard let strongSelf = self else {
                 return
             }
-            var authModel: OathModel?
-
-            if let responseData = responseData,
-                let oathModel = responseData.decoded(as: OathModel.self) {
-                // save auth data into keychain
-                authModel = oathModel
-                strongSelf.keychain.set(responseData, forKey: "auth_data")
+            
+            switch response {
+                
+            case .success(let result):
+                strongSelf.saveAuthKeyCredentials(with: result)
+                completion(result)
+            case .failure( _):
+                completion(nil)
             }
-
-            completion(authModel)
         }
         
     }
     
     /// retrieve saved Oath Data from keychain
     private func retriveAuthModel() -> OathModel?{
-        
-        if let authModel = self.authModel {
-            return authModel
-        }
         
         guard let authData = self.keychain.getData("auth_data") else {
             return nil
@@ -166,9 +181,15 @@ class APIClient {
         guard let authModel = try? decoder.decode(OathModel.self, from: authData) else {
             return nil
         }
-        self.authModel = authModel
         
         return authModel
     }
-
+    
+    
+    private func saveAuthKeyCredentials(with authData: OathModel) {
+        if let data = try? JSONSerialization.data(withJSONObject: authData, options: JSONSerialization.WritingOptions.prettyPrinted) {
+            self.keychain.set(data, forKey: "auth_data")
+        }
+    }
+    
 }
