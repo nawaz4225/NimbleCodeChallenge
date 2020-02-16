@@ -8,7 +8,8 @@
 
 import Foundation
 
-struct SurveyModel: Codable, ImageResolutionable {
+struct SurveyModel: JSONCodable, ImageResolutionable {
+    
     let id: String
     let title: String
     let description: String
@@ -24,6 +25,7 @@ struct SurveyModel: Codable, ImageResolutionable {
         case theme
         
     }
+    
 }
 
 struct Theme: Codable {
