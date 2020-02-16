@@ -23,11 +23,7 @@ class MainPageVM {
         
         self.pageController = PageControlModel(with: self.nextPageNumber(with: isRefresh))
         
-        guard let params = self.pageController.toDictionary() else {
-            return
-        }
-        
-        APIClient.sharedManager.makeApiRequest(requestMethod: .get, strURL: surveysURL,parameter: params) { [weak self] (responseData, error) in
+        APIClient.sharedManager.makeApiRequest(requestMethod: .get, strURL: surveysURL,parameter: self.pageController) { [weak self] (responseData, error) in
             
             guard let strongSelf = self else {
                 return

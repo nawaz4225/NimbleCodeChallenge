@@ -34,17 +34,12 @@ class APIClient {
     
     func makeApiRequest( requestMethod: HTTPMethod = .get
         , strURL url : String
-        , parameter :  Dictionary<String, Any>?
+        , parameter :  JSONCodable?
         , withErrorAlert errorAlert : Bool = false
         , withLoader isLoader : Bool = true
         , apiEncoding: ParameterEncoding = JSONEncoding.default
         , withBlock completion : @escaping (Data?, NetworkingErrors?) -> Void){
         
-        
-        var param = Dictionary<String,Any>()
-        if parameter != nil {
-            param = parameter!
-        }
         var apiHeaders = [
             "Content-Type": "application/json",
             "Accept": "application/json"
@@ -52,7 +47,7 @@ class APIClient {
         
         if let authModel = self.retriveAuthModel(),  authModel.isValidAccessToken() {
             apiHeaders["Authorization"] = "Bearer \(authModel.accessToken)"
-            self.almofireJSONrequest(strURL: url, parameter: param, apiHeaders: apiHeaders) { [weak self] (responseData, error) in
+            self.almofireJSONrequest(strURL: url, parameter: parameter, apiHeaders: apiHeaders) { [weak self] (responseData, error) in
                 guard let _ = self else {
                     return
                 }
@@ -70,7 +65,7 @@ class APIClient {
                 
                 strongSelf.authModel = authModel
                 apiHeaders["Authorization"] = "Bearer \(authModel.accessToken)"
-                strongSelf.almofireJSONrequest(strURL: url, parameter: param, apiHeaders: apiHeaders) { [weak self] (responseData, error) in
+                strongSelf.almofireJSONrequest(strURL: url, parameter: parameter, apiHeaders: apiHeaders) { [weak self] (responseData, error) in
                     guard let _ = self else {
                         return
                     }
@@ -83,7 +78,7 @@ class APIClient {
     
     private func almofireJSONrequest(requestMethod: HTTPMethod = .get
         , strURL url : String
-        , parameter :  Dictionary<String, Any>?
+        , parameter :  JSONCodable?
         , debugInfo isPrint : Bool = true
         , apiHeaders: Dictionary<String, String>
         , apiEncoding: ParameterEncoding = JSONEncoding.default
@@ -94,7 +89,12 @@ class APIClient {
             encodingScheme = URLEncoding.default
         }
         
-        Alamofire.request(url, method: requestMethod, parameters: parameter, encoding: encodingScheme, headers: apiHeaders).responseJSON(completionHandler: { (response) in
+        var params = Dictionary<String, Any>()
+        if let parameter = parameter {
+            params = parameter.toDictionary() ?? [:]
+        }
+        
+        Alamofire.request(url, method: requestMethod, parameters: params, encoding: encodingScheme, headers: apiHeaders).responseJSON(completionHandler: { (response) in
             
             switch(response.result) {
             case .success( _):
@@ -127,16 +127,13 @@ class APIClient {
                                       userName: "carlos@nimbl3.com",
                                       password: "antikera")
         
-        guard let params = user.toDictionary() else {
-            return
-        }
     
         let apiHeaders = [
             "Content-Type": "application/json",
             "Accept": "application/json",
         ]
         
-        self.almofireJSONrequest(requestMethod: .post, strURL: authURL, parameter: params, apiHeaders: apiHeaders) { [weak self] (responseData, error) in
+        self.almofireJSONrequest(requestMethod: .post, strURL: authURL, parameter: user, apiHeaders: apiHeaders) { [weak self] (responseData, error) in
             guard let strongSelf = self else {
                 return
             }
