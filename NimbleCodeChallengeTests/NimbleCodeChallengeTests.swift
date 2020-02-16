@@ -32,7 +32,7 @@ class NimbleCodeChallengeTests: XCTestCase {
     var dumySurveyGenerator: DummySurveys!
     var authModel: OathModel!
     var pageManager: PageVCManager!
-    var perPageLimit: Int!
+    var pageController: PageControlModel!
     var newloadDataindex: Int!
     var newdataLoadIndex: Int!
     
@@ -40,9 +40,11 @@ class NimbleCodeChallengeTests: XCTestCase {
         self.viewModel = MainPageVM()
         self.pageManager = PageVCManager()
         self.dumySurveyGenerator = DummySurveys()
-        self.perPageLimit = self.viewModel.perPageLimit
+        
         let dummySurveys = self.dumySurveyGenerator.createDummySurveys(size: 10)
         self.viewModel.surveysData.append(contentsOf: dummySurveys)
+
+        self.pageController = PageControlModel(with: 4)
         self.newdataLoadIndex = self.viewModel.surveysData.count - self.viewModel.loadDataThreshold
         self.authModel = OathModel(accessToken: "", tokenType: "", expiresIn: 7200, createdAt: Int64(Date().timeIntervalSince1970))
         
@@ -60,15 +62,18 @@ class NimbleCodeChallengeTests: XCTestCase {
     
     
     func testnextPageNumberWhen10loadedSurveys() {
-        XCTAssertEqual(viewModel.nextPageNumber(), (10 / self.perPageLimit))
+        XCTAssertEqual(viewModel.nextPageNumber(), (10 / self.pageController.perPage))
     }
     
     
-    func testloadnewdatawhenbelowthreshold()  {        XCTAssertFalse(self.viewModel.isLoadNewDataRequired(index: self.newdataLoadIndex - 1))
+    func testloadnewdatawhenbelowthreshold()  {
+        
+        XCTAssertFalse(self.viewModel.isLoadNewDataRequired(index: self.newdataLoadIndex - 1))
     }
     
     func testloadnewdatawhenabovethreshold()  {
-        XCTAssertTrue(self.viewModel.isLoadNewDataRequired(index: self.newdataLoadIndex))
+        
+        XCTAssertTrue(self.viewModel.isLoadNewDataRequired(index: self.newdataLoadIndex + 1))
     }
     
     func testSrollForwardAtLastPage() {

@@ -9,10 +9,11 @@
 import Foundation
 
 class MainPageVM {
-    private let perPageLimit: Int = 5
-    // load new data when reach 2rd last item
-    private let loadDataThreshold: Int = 2
+    let loadDataThreshold: Int = 2
     public var surveysData: [SurveyModel] = [SurveyModel]()
+    
+    private var pageController: PageControlModel = PageControlModel(with: 0)
+
     
     typealias fetchSurveysCompletion =  ((Error?)->Void)
     
@@ -20,8 +21,12 @@ class MainPageVM {
     func loadSurveyFromServer(with isRefresh: Bool = false,
                               _ completion: @escaping fetchSurveysCompletion){
         
-        let params = ["page": self.nextPageNumber(with: isRefresh),
-                      "per_page": self.perPageLimit]
+        self.pageController = PageControlModel(with: self.nextPageNumber(with: isRefresh))
+        
+        guard let params = self.pageController.toDictionary() else {
+            return
+        }
+        
         APIClient.sharedManager.makeApiRequest(requestMethod: .get, strURL: surveysURL,parameter: params) { [weak self] (responseData, error) in
             
             guard let strongSelf = self else {
@@ -47,7 +52,7 @@ class MainPageVM {
     /// index of next page to load
     /// - Parameter isRefresh: if refresh load first page (index = 0)
     func nextPageNumber(with isRefresh: Bool = false) -> Int {
-        return isRefresh ? 0 : (self.surveysData.count / self.perPageLimit)
+        return isRefresh ? 0 : (self.surveysData.count / self.pageController.perPage)
     }
     
     /// check if user has scrolled to 2rd last item
@@ -57,8 +62,8 @@ class MainPageVM {
         let dataCount = self.surveysData.count
         
         /// load data if perPagaLimit is full
-        if (dataCount % self.perPageLimit) == 0 {
-            return (index >= self.surveysData.count - self.loadDataThreshold)
+        if (dataCount % pageController.perPage) == 0 {
+            return (index >= dataCount - self.loadDataThreshold)
         }
         
         // already have complete data from server

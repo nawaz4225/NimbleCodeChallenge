@@ -25,8 +25,8 @@ enum NetworkingErrors: Error {
 }
 
 class APIClient {
-    static let sharedManager = APIClient()
     
+    static let sharedManager = APIClient()
     // pod KeychainSwift object to easy read write into keychain
     private let keychain = KeychainSwift()
     
@@ -92,14 +92,6 @@ class APIClient {
         , apiEncoding: ParameterEncoding = JSONEncoding.default
         , withBlock completion : @escaping (Data?, NetworkingErrors?) -> Void){
         
-        if isPrint {
-            print("*****************URL***********************\n")
-            print("URL:- \(url)\n")
-            print("Parameter:-\(String(describing: parameter))\n")
-            print("MethodType:- \(requestMethod.rawValue)\n")
-            print("headers:-\(String(describing: apiHeaders))\n")
-            print("*****************End***********************\n")
-        }
         var encodingScheme: ParameterEncoding = apiEncoding
         if requestMethod == .get {
             encodingScheme = URLEncoding.default
@@ -141,10 +133,14 @@ class APIClient {
     /// - Parameter completion: callback
     private func getAuthToken(_ completion: @escaping (OathModel?)->Void) {
         
-        let params = ["grant_type": "password",
-                      "username": "carlos@nimbl3.com",
-                      "password": "antikera"]
+        let user = UserModel(grantType: "password",
+                                      userName: "carlos@nimbl3.com",
+                                      password: "antikera")
         
+        guard let params = user.toDictionary() else {
+            return
+        }
+    
         let apiHeaders = [
             "Content-Type": "application/json",
             "Accept": "application/json",
@@ -161,7 +157,6 @@ class APIClient {
                     authModel = try decoder.decode(OathModel.self, from: responseData)
                     // save auth data into keychain
                     strongSelf.keychain.set(responseData, forKey: "auth_data")
-                    
                 }
                 
             }catch let error {

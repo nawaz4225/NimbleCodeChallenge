@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct OathModel: Codable {
+struct OathModel: JSONCodable {
     let accessToken, tokenType: String
     let expiresIn, createdAt: Int64
     
