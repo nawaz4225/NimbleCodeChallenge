@@ -129,3 +129,16 @@ extension UIView {
         }
     }
 }
+
+public extension Data {
+    /// Decode this data into a value
+    func decoded<T: Decodable>(as type: T.Type = T.self) -> T? {
+        do {
+            return try JSONDecoder().decode(T.self, from: self)
+        } catch _ {
+            
+        }
+        return nil
+    }
+}
+

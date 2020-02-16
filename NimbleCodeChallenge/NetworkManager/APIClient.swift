@@ -50,9 +50,6 @@ class APIClient {
             "Accept": "application/json"
         ]
         
-        
-        
-        
         if let authModel = self.retriveAuthModel(),  authModel.isValidAccessToken() {
             apiHeaders["Authorization"] = "Bearer \(authModel.accessToken)"
             self.almofireJSONrequest(strURL: url, parameter: param, apiHeaders: apiHeaders) { [weak self] (responseData, error) in
@@ -100,11 +97,8 @@ class APIClient {
         Alamofire.request(url, method: requestMethod, parameters: parameter, encoding: encodingScheme, headers: apiHeaders).responseJSON(completionHandler: { (response) in
             
             switch(response.result) {
-            case .success(let JSON):
-                if isPrint {
-                    print(JSON)
-                }
-                
+            case .success( _):
+              
                 DispatchQueue.main.async {
                     if response.response!.statusCode == 200 {
                         //do things
@@ -116,10 +110,6 @@ class APIClient {
                 }
                 
             case .failure(let error):
-                if isPrint {
-                    print(error.localizedDescription)
-                }
-                
                 DispatchQueue.main.async {
                     completion(nil, .returnedError(error))
                 }
@@ -151,18 +141,14 @@ class APIClient {
                 return
             }
             var authModel: OathModel?
-            do{
-                let decoder = JSONDecoder()
-                if let responseData = responseData {
-                    authModel = try decoder.decode(OathModel.self, from: responseData)
-                    // save auth data into keychain
-                    strongSelf.keychain.set(responseData, forKey: "auth_data")
-                }
-                
-            }catch let error {
-                print(error.localizedDescription)
+
+            if let responseData = responseData,
+                let oathModel = responseData.decoded(as: OathModel.self) {
+                // save auth data into keychain
+                authModel = oathModel
+                strongSelf.keychain.set(responseData, forKey: "auth_data")
             }
-            
+
             completion(authModel)
         }
         

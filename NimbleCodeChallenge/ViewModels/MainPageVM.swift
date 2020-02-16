@@ -37,8 +37,7 @@ class MainPageVM {
                 return
             }
             if let responseData = responseData {
-                let decoder = JSONDecoder()
-                if let serverData = try? decoder.decode([SurveyModel].self, from: responseData), serverData.count > 0 {
+                if let serverData = responseData.decoded(as: [SurveyModel].self), serverData.count > 0 {
                     if isRefresh {
                         strongSelf.surveysData.removeAll()
                     }
