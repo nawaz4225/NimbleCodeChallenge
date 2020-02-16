@@ -50,7 +50,7 @@ extension MainPageVC: UIPageViewControllerDataSource,UIPageViewControllerDelegat
         }
         
         let previousIndex: Int = previousVC.index
-        let nextPageIndex = self.pageManager.nextPageIndex(with: previousIndex)
+        let nextPageIndex = self.pageManager.nextPageIndex(with: previousIndex, isAfter: false)
         return self.setUpNextVC(pageIndex: nextPageIndex)
     }
     
