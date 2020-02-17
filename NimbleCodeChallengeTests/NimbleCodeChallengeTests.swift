@@ -107,17 +107,4 @@ class NimbleCodeChallengeTests: XCTestCase {
         XCTAssertFalse(authModel.isValidAccessToken())
     }
     
-    
-    func testAPICallForRefreshingData() {
-        let e = expectation(description: "Alamofire")
-        self.viewModel.loadSurveyFromServer(with: true) { (errorInReponse) in
-            guard let _ = errorInReponse else {
-                XCTAssertTrue(self.viewModel.surveysData.count > 0)
-                e.fulfill()
-                return
-            }
-        }
-        waitForExpectations(timeout: 10.0, handler: nil)
-    }
-    
 }
